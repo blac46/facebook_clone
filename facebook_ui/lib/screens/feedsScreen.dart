@@ -1,115 +1,93 @@
-
-import 'package:facebook_ui/widgets/flick_video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
-import 'package:video_player/video_player.dart';
 
 import '../widgets/style.dart';
 
-class WatchScreen extends StatefulWidget {
-  const WatchScreen({Key? key}) : super(key: key);
+class FeedsScreen extends StatefulWidget {
+  const FeedsScreen({Key? key}) : super(key: key);
 
   @override
-  State<WatchScreen> createState() => _WatchScreenState();
+  State<FeedsScreen> createState() => _FeedsScreenState();
 }
- 
 
-class _WatchScreenState extends State<WatchScreen> {
+class _FeedsScreenState extends State<FeedsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          title: NeoText(
+            text: "Feeds",
+            size: 30,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+          actions: [
+            CircleAvatar(
+              backgroundColor: Colors.grey[300],
+              child: Icon(
+                IcoFontIcons.search,
+                color: Colors.black,
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            SizedBox(
+              width: 5,
+            ),
+            
+          ]),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+         children: [
+          NeoText(text: "All", size: 19, color: Colors.black, fontWeight: FontWeight.bold),
+          NeoText(text: "Favourites", size: 19, color: Colors.black, fontWeight: FontWeight.bold),
+          NeoText(text: "Friends", size: 19, color: Colors.black, fontWeight: FontWeight.bold),
+          NeoText(text: "Groups", size: 19, color: Colors.black, fontWeight: FontWeight.bold)
+
+         ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Divider(
+            thickness: 10,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  NeoText(
-                      text: "For you",
-                      size: 17,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                  NeoText(
-                      text: "For you",
-                      size: 17,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                  NeoText(
-                      text: "For you",
-                      size: 17,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                  NeoText(
-                      text: "For you",
-                      size: 17,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold)
+                  ListView.separated(
+                      separatorBuilder: (context, index) => Divider(
+                            height: 10,
+                            color: Colors.grey[300],
+                            thickness: 10,
+                          ),
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return profileCard(context);
+                      }),
                 ],
               ),
             ),
-            Divider(
-              thickness: 10,
-            ),
-            ListView.separated(
-          separatorBuilder: (context, index) => Divider(
-           height: 10,
-           color: Colors.grey[300],
-           thickness: 10,
-           ),
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 7,
-           itemBuilder: (context, index) {
-           return myCard(context);
-                },),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  AppBar appBar() {
-    return AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: NeoText(
-          text: "Watch",
-          size: 30,
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-        ),
-        actions: [
-          CircleAvatar(
-            backgroundColor: Colors.grey[300],
-            child: Icon(
-              Icons.person,
-              color: Colors.black,
-            ),
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.grey[300],
-            child: Icon(
-              IcoFontIcons.search1,
-              color: Colors.black,
-            ),
-          ),
-        ]);
-  }
-
-  Card myCard(BuildContext context) {
+  Card profileCard(BuildContext context) {
     return Card(
       child: SizedBox(
         height: MediaQuery.of(context).size.height / 2.2,
@@ -152,10 +130,13 @@ class _WatchScreenState extends State<WatchScreen> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.grey[300],
+                image: DecorationImage(
+                    image: NetworkImage(
+                        "https://media.istockphoto.com/photos/talented-female-artist-works-on-abstract-oil-painting-using-paint-picture-id1183183791?b=1&k=20&m=1183183791&s=170667a&w=0&h=XL98MEMm_-kJdDCEc7v-Z66R7dnIuRRMAcg5Y9dA-y8="),
+                    fit: BoxFit.fill),
               ),
-              child:SamplePlayer()
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.only(left: 5, top: 2),
               child: Row(
                 children: [
@@ -167,7 +148,7 @@ class _WatchScreenState extends State<WatchScreen> {
                     ),
                   ),
                   SizedBox(
-                    width: 170,
+                    width: 210,
                   ),
                   NeoText(
                       text: "Comment",
@@ -182,18 +163,10 @@ class _WatchScreenState extends State<WatchScreen> {
                       size: 15,
                       color: Colors.grey,
                       fontWeight: FontWeight.bold),
-                      SizedBox(
-                    width: 10,
-                  ),
-                      NeoText(
-                      text: "Views",
-                      size: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold),
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: Divider(
                 thickness: 2,
               ),
@@ -237,7 +210,7 @@ class _WatchScreenState extends State<WatchScreen> {
                 ),
               ],
             ),
-        ],
+          ],
         ),
       ),
     );

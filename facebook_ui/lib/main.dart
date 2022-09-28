@@ -1,5 +1,7 @@
 import 'package:facebook_ui/screens/splash_screen.dart';
+import 'package:facebook_ui/widgets/video_play.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 void main() {
   runApp(const MyApp());

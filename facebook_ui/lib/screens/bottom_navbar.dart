@@ -1,5 +1,9 @@
 
+import 'package:facebook_ui/screens/feedsScreen.dart';
 import 'package:facebook_ui/screens/home_screen.dart';
+import 'package:facebook_ui/screens/market_screen.dart';
+import 'package:facebook_ui/screens/menu_Screen.dart';
+import 'package:facebook_ui/screens/notificationScreen.dart';
 import 'package:facebook_ui/screens/watchScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +19,10 @@ class _BottomNavState extends State<BottomNav> {
   List pages=[
   HomeScreen(),
    WatchScreen(),
-   Scaffold(),
-   Scaffold(),
-   Scaffold(),
-   Scaffold(),
+   MarketPlaceScreen(),
+   FeedsScreen(),
+   NotificationScreen(),
+   MenuScreen(),
   ];
 
   void _onTap(int selectedItem){
